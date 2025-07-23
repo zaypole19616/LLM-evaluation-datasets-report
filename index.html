@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM评测数据集分类与介绍</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #0056b3;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        h3 {
+            margin-top: 30px;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        code {
+            background-color: #e9e9e9;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #e9e9e9;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>大语言模型评测数据集分类与介绍</h1>
+<h2>引言</h2>
+<p>随着大语言模型（LLM）的快速发展，对其性能进行全面、客观的评估变得至关重要。LLM评测数据集是衡量模型能力、识别其优势与劣势、并推动模型进步的标准化工具。本报告将对当前主流的LLM评测数据集进行分类、介绍其特点，并提供具体示例。</p>
+<h2>LLM评测基准概述</h2>
+<p>LLM评测基准是标准化测试，旨在衡量和比较不同语言模型的能力。它们通过将每个模型置于相同的测试集下，从而实现“同类比较”。</p>
+<h3>为什么需要LLM评测基准？</h3>
+<ul>
+<li><strong>评估标准化和透明度</strong>: 提供一致、可复现的方式来评估和排名不同LLM在特定任务上的表现。</li>
+<li><strong>进展跟踪和微调</strong>: 作为模型进展的标志，帮助评估新修改是否提升了性能，并识别模型的弱点以指导微调。</li>
+<li><strong>模型选择</strong>: 为开发者选择适合特定应用的LLM提供参考。</li>
+</ul>
+<h3>LLM评测基准的工作原理</h3>
+<p>LLM评测基准通过固定测试来评估LLM。它们将模型暴露于各种测试输入，并使用标准化指标来衡量其性能，以便于比较和排名。</p>
+<ol>
+<li><strong>数据集输入和测试</strong>: 基准包含模型需要完成的任务，如解决数学问题、编写代码、回答问题或翻译文本。测试用例的数量和呈现方式因基准而异。通常，它是一个文本输入数据集，LLM必须处理每个输入并产生特定响应。大多数基准都附带“真实”答案进行比较。</li>
+<li><strong>性能评估和评分</strong>: 模型完成基准任务后，可以衡量其质量。每个基准都包含一个评分系统，用于比较结果。</li>
+</ol>
+<h3>LLM评测基准的局限性</h3>
+<ul>
+<li><strong>数据污染</strong>: 模型可能在用于测试的相同数据上进行过训练，导致评测结果失真。</li>
+<li><strong>狭隘的焦点</strong>: 某些基准可能只关注LLM的特定能力，无法全面评估。</li>
+<li><strong>时效性</strong>: 随着模型能力的提升，旧的基准可能变得不再具有挑战性，需要开发更复杂的基准来跟上。</li>
+</ul>
+<h2>LLM评测基准的测试方法</h2>
+<p>LLM评测基准在测试模型时，通常采用以下三种方法：</p>
+<ul>
+<li><strong>少样本 (Few-shot)</strong>: 在提示LLM执行任务之前，提供少量示例来展示如何完成任务。这展示了模型在数据稀缺情况下的学习能力。</li>
+<li><strong>零样本 (Zero-shot)</strong>: LLM在没有看到任何示例的情况下被提示完成任务。这揭示了模型理解新概念和适应新场景的能力。</li>
+<li><strong>微调 (Fine-tuned)</strong>: 模型在与基准测试使用的数据集相似的数据集上进行训练。目标是提升LLM对与基准测试相关联的任务的掌握，并优化其在该特定任务中的性能。</li>
+</ul>
+<h2>LLM评测的关键指标</h2>
+<p>基准测试采用不同的指标来评估LLM的性能，常见的包括：</p>
+<ul>
+<li><strong>准确率 (Accuracy/Precision)</strong>: 计算正确预测的百分比。</li>
+<li><strong>召回率 (Recall)</strong>: 量化真实正例的数量，即实际正确的预测。</li>
+<li><strong>F1分数 (F1 Score)</strong>: 结合准确率和召回率的指标，平衡假正例和假负例。</li>
+<li><strong>精确匹配 (Exact Match)</strong>: LLM的预测与标准答案完全匹配的比例，适用于翻译和问答任务。</li>
+<li><strong>困惑度 (Perplexity)</strong>: 衡量模型预测能力的好坏，困惑度越低，模型理解任务的能力越好。</li>
+<li><strong>BLEU (Bilingual Evaluation Understudy)</strong>: 通过计算LLM翻译与人工翻译之间匹配的n-gram来评估机器翻译。</li>
+<li><strong>ROUGE (Recall-Oriented Understudy for Gisting Evaluation)</strong>: 评估文本摘要，例如ROUGE-N计算摘要中的n-gram匹配，ROUGE-L计算最长公共子序列。</li>
+</ul>
+<p>除了定量指标，人工评估也涉及定性指标，如连贯性、相关性和语义意义。通常会结合定量和定性指标进行全面评估。</p>
+<h2>LLM评测数据集分类</h2>
+<h3>1. 通用能力评测数据集</h3>
+<p>这类数据集旨在评估LLM在广泛知识、常识推理和语言理解方面的通用能力。</p>
+<h4>MMLU (Massive Multitask Language Understanding)</h4>
+<ul>
+<li><strong>特点</strong>: 包含57个多选问答任务，涵盖STEM、人文、社会科学等领域，难度从初级到高级专业水平，旨在评估模型在零样本和少样本设置下的知识和解决问题能力。</li>
+<li><strong>示例</strong>: 涉及初等数学、美国历史、计算机科学、法律等学科的综合知识问答。</li>
+</ul>
+<h4>Winogrande</h4>
+<ul>
+<li><strong>特点</strong>: 包含44k问题，受Winograd Schema Challenge启发，旨在通过填空任务评估模型的常识推理能力，并提高对数据集特定偏差的鲁棒性。</li>
+<li><strong>示例</strong>: “The city councilmen refused the demonstrators a permit because ___ feared violence.” (Options: A. the councilmen, B. the demonstrators)</li>
+</ul>
+<h4>AI2 ARC (AI2 Reasoning Challenge)</h4>
+<ul>
+<li><strong>特点</strong>: 包含7787个小学水平的多项选择科学问题，旨在鼓励对高级问答的研究，分为挑战集和简单集。</li>
+<li><strong>示例</strong>: 科学常识问题，例如“为什么植物的叶子是绿色的？”</li>
+</ul>
+<h3>2. 专业领域评测数据集</h3>
+<p>这类数据集专注于评估LLM在特定学科或专业领域的知识和推理能力，通常涉及高难度和专业性强的题目。</p>
+<h4>C-Eval</h4>
+<ul>
+<li><strong>特点</strong>: 全面的中文基础模型评测数据集，包含13948个多项选择题，涵盖52个学科和四个难度级别，评估模型在中文语境下的综合知识能力。</li>
+<li><strong>示例</strong>: 涵盖中国历史、地理、文学、科学等领域的标准化考试题目。</li>
+</ul>
+<h4>CMMLU (Chinese Massive Multitask Language Understanding)</h4>
+<ul>
+<li><strong>特点</strong>: 综合性的中文评估基准，包含67个主题，涵盖自然科学、社会科学、工程、人文和常识等，许多任务具有中国特定答案，是一个完全中国化的中文测试基准。</li>
+<li><strong>示例</strong>: 涉及中国驾驶规范、中国食物文化等具有中国特色的问题。</li>
+</ul>
+<h4>GAOKAO-Bench</h4>
+<ul>
+<li><strong>特点</strong>: 以中国高考题作为评测数据集，包含2010-2022年全国高考卷的客观题和主观题，旨在直观高效地测评大模型语言理解能力和逻辑推理能力。</li>
+<li><strong>示例</strong>: 历年高考语文、数学、英语、理综、文综等科目的真题。</li>
+</ul>
+<h4>AGIEval</h4>
+<ul>
+<li><strong>特点</strong>: 以人为中心的基准测试，用于评估基础模型在标准化考试（如高考、公务员考试、法学院入学考试、数学竞赛和律师资格考试）中的表现，旨在评估模型与人类认知和解决问题相关的任务中的一般能力。</li>
+<li><strong>示例</strong>: 中国高考、美国SAT、法学院入学考试等高难度考试题目。</li>
+</ul>
+<h3>3. 推理能力评测数据集</h3>
+<p>这类数据集主要评估LLM的逻辑推理、数学解题和复杂问题解决能力。</p>
+<h4>GSM8K (Grade School Math 8K)</h4>
+<ul>
+<li><strong>特点</strong>: 包含8.5K高质量、语言多样化的小学数学应用题，需要多步骤推理来解决，有效评估模型的数学与逻辑能力。</li>
+<li><strong>示例</strong>: “一个水箱里有500升水。如果每分钟流出10升水，那么水箱里的水会在多少分钟内流完？”</li>
+</ul>
+<h4>MATH</h4>
+<ul>
+<li><strong>特点</strong>: 由数学竞赛问题组成，包括AMC 10、AMC 12和AIME等，用于评估模型在高级数学问题上的解决能力。</li>
+<li><strong>示例</strong>: 复杂的代数、几何或微积分问题。</li>
+</ul>
+<h3>4. 代码能力评测数据集</h3>
+<p>这类数据集用于评估LLM在代码生成、理解、调试和编程问题解决方面的能力。</p>
+<h4>HumanEval</h4>
+<ul>
+<li><strong>特点</strong>: 由OpenAI发布的164个手写编程问题，包括模型语言理解、推理、算法和简单数学等任务。</li>
+<li><strong>示例</strong>: 编写一个Python函数，根据给定描述实现特定功能，例如“计算列表中所有偶数的和”。</li>
+</ul>
+<h4>MBPP (Mostly Basic Python Programs)</h4>
+<ul>
+<li><strong>特点</strong>: 包含约1000个众包Python编程问题，旨在由入门级程序员解决，涵盖编程基础知识和标准库功能，每个问题包含任务描述、代码解决方案和3个自动化测试用例。</li>
+<li><strong>示例</strong>: 编写一个Python函数，将字符串反转。</li>
+</ul>
+<h3>5. 安全与伦理评测数据集</h3>
+<p>这类数据集评估LLM在安全性、偏见、有害内容生成以及伦理对齐方面的表现。</p>
+<h4>SuperCLUE (安全性部分)</h4>
+<ul>
+<li><strong>特点</strong>: 综合性大模型评测基准，其安全性部分聚焦于评估模型是否会生成有害、偏见或不当内容，以及是否能抵御恶意攻击。</li>
+<li><strong>示例</strong>: 评估模型在面对诱导性问题时，是否能拒绝生成歧视性言论、仇恨言论或虚假信息。</li>
+</ul>
+<h3>6. 多语言能力评测数据集</h3>
+<p>这类数据集评估LLM在不同语言环境下的理解、生成和推理能力，通常包含多种语言的测试数据。</p>
+<h4>M3Exam</h4>
+<ul>
+<li><strong>特点</strong>: 包含12317个问题，涵盖从高资源语种（如中文、英文）到低资源语种，评估模型在多语言环境下的理解和推理能力。一个特点是所有问题均来源是当地的真实人类试题，所以包含了特定的文化背景，要求模型不仅是能理解语言，还需要对背景知识有所掌握。</li>
+<li><strong>示例</strong>: 跨语言的阅读理解、知识问答等任务，例如用斯瓦希里语或爪哇语提问，模型需要理解并给出正确答案。</li>
+</ul>
+<h2>总结</h2>
+<p>LLM评测数据集是评估和推动大语言模型发展的基石。通过对不同类型数据集的深入理解和应用，我们可以更全面地衡量模型的各项能力，包括通用知识、专业技能、推理、代码、安全以及多语言处理能力。尽管评测基准存在数据污染和时效性等局限性，但它们仍然是当前评估LLM性能最有效和标准化的方法。随着LLM技术的不断演进，评测数据集也将持续更新和完善，以适应新的挑战和需求。</p>
+    </div>
+</body>
+</html>
